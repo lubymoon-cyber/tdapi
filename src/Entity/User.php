@@ -252,12 +252,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getHireDate(): ?string
+    public function getHireDate(): ??\DateTimeInterface
     {
         return $this->hireDate;
     }
 
-    public function setHireDate(string $hireDate): self
+    public function setHireDate(datetime $hireDate): ?\DateTimeInterface
     {
         $this->hireDate = $hireDate;
 
