@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\ContactType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,6 +63,37 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/new.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+     /**
+     * @Route("/contact_new", name="contact_new", methods={"GET","POST"})
+     */
+    public function contact_new(Request $request): Response
+    {
+        $user = new User();
+        $form = $this->createForm(ContactType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // encode the plain password
+            $user->setPassword(
+                $this->passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('user/contact_new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
