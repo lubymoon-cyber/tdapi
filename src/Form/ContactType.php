@@ -11,13 +11,12 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class UserType extends AbstractType
+class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('email')
-            ->add('roles')
             ->add('password')
             ->add('lastName')
             ->add('firstName')
@@ -35,19 +34,6 @@ class UserType extends AbstractType
             ])
             ->add('registrationNumber')
             ->add('phone')
-            ->add(
-                'roles',
-                ChoiceType::class, [
-                    'choices' => [
-                        'ROLE_SUPER_ADMIN' => 'SUPER_ROLE_ADMIN',
-                        'ROLE_ADMIN' => 'ROLE_ADMIN',
-                        'ROLE_COMPTABLE' => 'ROLE_COMPTABLE',
-                        'ROLE_USER' => 'ROLE_USER'
-                    ],
-                    'expanded' => true,
-                    'multiple' => true,
-                ]
-            )
             ->add('password',
                 RepeatedType::class,
                 array(
