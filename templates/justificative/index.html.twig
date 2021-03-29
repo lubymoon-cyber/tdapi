@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Justificative index{% endblock %}
+
+{% block body %}
+    <h1>Justificative index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>CreatedDate</th>
+                <th>DateProduction</th>
+                <th>Path</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for justificative in justificatives %}
+            <tr>
+                <td>{{ justificative.id }}</td>
+                <td>{{ justificative.amount }}</td>
+                <td>{{ justificative.createdDate ? justificative.createdDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ justificative.dateProduction ? justificative.dateProduction|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ justificative.path }}</td>
+                <td>
+                    <a href="{{ path('justificative_show', {'id': justificative.id}) }}">show</a>
+                    <a href="{{ path('justificative_edit', {'id': justificative.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('justificative_new') }}">Create new</a>
+{% endblock %}

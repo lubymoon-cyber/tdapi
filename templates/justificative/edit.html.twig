@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Justificative{% endblock %}
+
+{% block body %}
+    <h1>Edit Justificative</h1>
+
+    {{ include('justificative/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('justificative_index') }}">back to list</a>
+
+    {{ include('justificative/_delete_form.html.twig') }}
+{% endblock %}

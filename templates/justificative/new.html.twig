@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Justificative{% endblock %}
+
+{% block body %}
+    <h1>Create new Justificative</h1>
+
+    {{ include('justificative/_form.html.twig') }}
+
+    <a href="{{ path('justificative_index') }}">back to list</a>
+{% endblock %}
